@@ -5,16 +5,32 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen';
 import ShoppingScreen from './screens/ShoppingScreen';
 import {RouteName} from './routes';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import BrowserScreen from './screens/BrowserScreen';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+const HomeTab = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name={RouteName.HOME} component={HomeScreen} />
+      <Tab.Screen name={RouteName.SHOPPING} component={ShoppingScreen} />
+    </Tab.Navigator>
+  );
+};
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name={RouteName.HOME} component={HomeScreen} />
-        <Tab.Screen name={RouteName.SHOPPING} component={ShoppingScreen} />
-      </Tab.Navigator>
+      <Stack.Navigator>
+        <Stack.Screen
+          name={RouteName.HOME_TAB}
+          component={HomeTab}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen name={RouteName.BROWSER} component={BrowserScreen} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

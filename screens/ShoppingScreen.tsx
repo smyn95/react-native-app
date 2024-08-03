@@ -1,8 +1,19 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
+import {RouteName} from '../routes';
 
-const ShoppingScreen = () => {
-  return <Text>ShoppingScreen</Text>;
+const ShoppingScreen = ({navigation}) => {
+  return (
+    <View>
+      <Text>ShoppingScreen</Text>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate(RouteName.BROWSER);
+        }}>
+        <Text>Go To Browser</Text>
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 export default ShoppingScreen;
