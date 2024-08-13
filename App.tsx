@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen';
 import ShoppingScreen from './screens/ShoppingScreen';
-import {RootStackParamList, RouteName} from './routes';
+import {RootStackParamList, RouteNames} from './routes';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import BrowserScreen from './screens/BrowserScreen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -34,12 +34,12 @@ const HomeTab = () => {
         headerShown: false,
       }}>
       <Tab.Screen
-        name={RouteName.HOME}
+        name={RouteNames.HOME}
         component={HomeScreen}
         options={{tabBarLabel: '홈', tabBarIcon: HomeIcon}}
       />
       <Tab.Screen
-        name={RouteName.SHOPPING}
+        name={RouteNames.SHOPPING}
         component={ShoppingScreen}
         options={{tabBarLabel: '쇼핑', tabBarIcon: ShoppingIcon}}
       />
@@ -52,11 +52,11 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name={RouteName.HOME_TAB}
+          name={RouteNames.HOME_TAB}
           component={HomeTab}
           options={{headerShown: false}}
         />
-        <Stack.Screen name={RouteName.BROWSER} component={BrowserScreen} />
+        <Stack.Screen name={RouteNames.BROWSER} component={BrowserScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

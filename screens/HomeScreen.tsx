@@ -1,6 +1,6 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-import {RootStackParamList, RouteName} from '../routes';
+import {RootStackParamList, RouteNames} from '../routes';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import WebView from 'react-native-webview';
 
@@ -27,7 +27,7 @@ const HomeScreen = ({navigation}: Props) => {
           }
 
           if (!url?.startsWith('https://')) {
-            navigation.navigate(RouteName.BROWSER);
+            navigation.navigate(RouteNames.BROWSER);
             return true;
           }
 
