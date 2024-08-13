@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {RootStackParamList, RouteName} from '../routes';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
@@ -12,6 +13,7 @@ const ShoppingScreen = ({navigation}: Props) => {
       <TouchableOpacity onPress={() => navigation.navigate(RouteName.BROWSER)}>
         <Text>Go To Browser</Text>
       </TouchableOpacity>
+      <MaterialCommunityIcons name="shopping" size={100} color={'red'} />
     </View>
   );
 };
