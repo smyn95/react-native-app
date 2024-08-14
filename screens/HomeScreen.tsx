@@ -15,23 +15,21 @@ const HomeScreen = ({navigation}: Props) => {
         source={{uri: 'https://m.naver.com'}}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
-        onShouldStartLoadWithRequest={req => {
-          const {url, mainDocumentURL} = req;
-
-          const isNaverMobile =
-            url?.startsWith('https://m.naver.com') ||
-            mainDocumentURL?.startsWith('https://m.naver.com');
-
-          if (isNaverMobile) {
+        onShouldStartLoadWithRequest={request => {
+          console.log(request);
+          if (
+            request.url.startsWith('https://m.naver.com') ||
+            request.mainDocumentURL?.startsWith('https://m.naver.com')
+          ) {
             return true;
           }
 
-          if (!url?.startsWith('https://')) {
-            navigation.navigate(RouteNames.BROWSER);
-            return true;
+          if (request.url != null && request.url.startsWith('https://')) {
+            navigation.navigate(RouteNames.BROWSER, {initialUrl: request.url});
+            return false;
           }
 
-          return false;
+          return true;
         }}
       />
     </SafeAreaView>

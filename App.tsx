@@ -56,7 +56,11 @@ const App = () => {
           component={HomeTab}
           options={{headerShown: false}}
         />
-        <Stack.Screen name={RouteNames.BROWSER} component={BrowserScreen} />
+        <Stack.Screen
+          name={RouteNames.BROWSER}
+          component={BrowserScreen}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
