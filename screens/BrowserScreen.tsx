@@ -1,5 +1,5 @@
-import React, {useMemo, useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import React, {useMemo, useRef, useState} from 'react';
+import {Animated, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import WebView from 'react-native-webview';
 import {RootStackParamList} from '../routes';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -17,6 +17,14 @@ const styles = StyleSheet.create({
   urlText: {
     color: 'white',
   },
+  loadingBarBackground: {
+    height: 3,
+    backgroundColor: 'white',
+  },
+  loadingBar: {
+    height: '100%',
+    backgroundColor: 'green',
+  },
 });
 
 const BrowserScreen = ({route}: Props) => {
@@ -28,16 +36,35 @@ const BrowserScreen = ({route}: Props) => {
     [url],
   );
 
+  const progressAnim = useRef(new Animated.Value(0)).current;
+
   return (
     <SafeAreaView style={styles.safearea}>
       <View style={styles.urlContainer}>
         <Text style={styles.urlText}>{urlText}</Text>
+      </View>
+      <View style={styles.loadingBarBackground}>
+        <Animated.View
+          style={[
+            styles.loadingBar,
+            {
+              width: progressAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: ['0%', '100%'],
+              }),
+            },
+          ]}
+        />
       </View>
       <WebView
         source={{uri: initialUrl}}
         onNavigationStateChange={event => {
           setUrl(event.url);
         }}
+        onLoadProgress={event => {
+          progressAnim.setValue(event.nativeEvent.progress);
+        }}
+        onLoadEnd={() => progressAnim.setValue(0)}
       />
     </SafeAreaView>
   );
