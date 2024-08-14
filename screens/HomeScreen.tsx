@@ -1,18 +1,18 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
-import {RootStackParamList, RouteNames} from '../routes';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { RootStackParamList, RouteNames } from '../routes';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import WebView from 'react-native-webview';
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
-const styles = StyleSheet.create({safearea: {flex: 1}});
+const styles = StyleSheet.create({ safearea: { flex: 1 } });
 
-const HomeScreen = ({navigation}: Props) => {
+const HomeScreen = ({ navigation }: Props) => {
   return (
     <SafeAreaView style={styles.safearea}>
       <WebView
-        source={{uri: 'https://m.naver.com'}}
+        source={{ uri: 'https://m.naver.com' }}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         onShouldStartLoadWithRequest={request => {
@@ -25,7 +25,9 @@ const HomeScreen = ({navigation}: Props) => {
           }
 
           if (request.url != null && request.url.startsWith('https://')) {
-            navigation.navigate(RouteNames.BROWSER, {initialUrl: request.url});
+            navigation.navigate(RouteNames.BROWSER, {
+              initialUrl: request.url,
+            });
             return false;
           }
 

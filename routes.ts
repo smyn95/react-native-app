@@ -7,5 +7,5 @@ export const RouteNames = {
 
 export type RootStackParamList = {
   [RouteNames.HOME_TAB]: undefined;
-  [RouteNames.BROWSER]: {initialUrl: String};
+  [RouteNames.BROWSER]: { initialUrl: String };
 };

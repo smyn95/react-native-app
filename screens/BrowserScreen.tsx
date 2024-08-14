@@ -1,13 +1,13 @@
-import React, {useMemo, useRef, useState} from 'react';
-import {Animated, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import React, { useMemo, useRef, useState } from 'react';
+import { Animated, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import WebView from 'react-native-webview';
-import {RootStackParamList} from '../routes';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import { RootStackParamList } from '../routes';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'browser'>;
 
 const styles = StyleSheet.create({
-  safearea: {flex: 1, backgroundColor: 'black'},
+  safearea: { flex: 1, backgroundColor: 'black' },
   urlContainer: {
     backgroundColor: 'black',
     alignItems: 'center',
@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const BrowserScreen = ({route}: Props) => {
-  const {initialUrl} = route.params;
+const BrowserScreen = ({ route }: Props) => {
+  const { initialUrl } = route.params;
   const [url, setUrl] = useState(initialUrl);
 
   const urlText = useMemo(
@@ -57,7 +57,7 @@ const BrowserScreen = ({route}: Props) => {
         />
       </View>
       <WebView
-        source={{uri: initialUrl}}
+        source={{ uri: initialUrl }}
         onNavigationStateChange={event => {
           setUrl(event.url);
         }}
