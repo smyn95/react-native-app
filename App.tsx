@@ -10,6 +10,7 @@ import BrowserScreen from './screens/BrowserScreen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import LoginButton from './components/LoginButton';
 import LoginScreen from './screens/LoginScreen';
+import { WebViewProvider } from './components/WebViewProvider';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -58,35 +59,37 @@ const HomeTab = () => {
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name={RouteNames.HOME_TAB}
-          component={HomeTab}
-          options={{
-            title: '',
-            headerStyle: { backgroundColor: 'black' },
-            headerRight: LoginButton,
-          }}
-        />
-        <Stack.Screen
-          name={RouteNames.BROWSER}
-          component={BrowserScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name={RouteNames.LOGIN}
-          component={LoginScreen}
-          options={{
-            title: '',
-            headerStyle: {
-              backgroundColor: 'black',
-            },
-            headerTintColor: 'white',
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <WebViewProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name={RouteNames.HOME_TAB}
+            component={HomeTab}
+            options={{
+              title: '',
+              headerStyle: { backgroundColor: 'black' },
+              headerRight: LoginButton,
+            }}
+          />
+          <Stack.Screen
+            name={RouteNames.BROWSER}
+            component={BrowserScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name={RouteNames.LOGIN}
+            component={LoginScreen}
+            options={{
+              title: '',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </WebViewProvider>
   );
 };
 
