@@ -96,11 +96,8 @@ const DISABLE_PINCH_ZOOM = `(function() {
 
 const BrowserScreen = ({ route, navigation }: Props) => {
   const context = useContext(WebViewContext);
-
   const { initialUrl } = route.params;
   const [url, setUrl] = useState(initialUrl);
-  const [canGoBack, setCanGoBack] = useState(false);
-  const [canGoForward, setCanGoForward] = useState(false);
 
   const urlText = useMemo(
     () => url.replace('https://', '').split('/')[0],
@@ -108,7 +105,18 @@ const BrowserScreen = ({ route, navigation }: Props) => {
   );
 
   const progressAnim = useRef(new Animated.Value(0)).current;
+
   const webViewRef = useRef<WebView | null>(null);
+  const [canGoBack, setCanGoBack] = useState(false);
+  const [canGoForward, setCanGoForward] = useState(false);
+
+  useBackHandler(() => {
+    if (canGoBack) {
+      webViewRef.current?.goBack();
+      return true;
+    }
+    return false;
+  });
 
   return (
     <SafeAreaView style={styles.safearea}>
